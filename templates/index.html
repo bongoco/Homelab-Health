@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homelab Status</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Homelab Status</h1>
+        <p id="status_pi" class="status">Loading...</p>
+        <p id="status_hp" class="status">Loading...</p>
+        <p id="status_ubuntu" class="status">Loading...</p>
+    </div>
+</body>
+</html>
