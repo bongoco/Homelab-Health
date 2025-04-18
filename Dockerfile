@@ -1,5 +1,5 @@
 #use current Python version
-FROM python:3.11-slim
+FROM python:3.11.12.3
 #set working directory within container to /app, if doesn't exist
 WORKDIR /app
 #copy all direcotry contents to /app at the container
