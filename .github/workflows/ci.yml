@@ -24,3 +24,6 @@ jobs:
       - name: Run tests
         run: |
           pytest tests.py
+      - name: Update Docker image
+        run: |
+          docker build -t homelab-health

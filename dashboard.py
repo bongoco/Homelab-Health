@@ -4,7 +4,7 @@ import requests
 app=Flask(__name__)
 
 services={
-    'server_pi':'http://10.0.0.201/admin/', 
+    'server_pi':'http://10.0.0.201/admin/login', 
     'server_hp':'https://10.0.0.202:8006/',
     'vm_ubuntu':'http://10.0.0.203'
 }
@@ -14,9 +14,12 @@ def health_checker(service):
     try:
         response=requests.get(ip, verify=False, timeout=5) 
         status=response.status_code
+        print('Service: '+ service +' Status: '+ str(status))
         if status==200:
+            print(service+' UP')
             return 'UP'
         else:
+            print(service+' DOWN')
             return f'DOWN ({status})'
     except requests.exceptions.RequestException:
         return 'Offline'
@@ -30,10 +33,12 @@ def dashboard():
     return render_template("index.html")
 
 @app.route('/status')
+    #the API
 def status():
     #created dictionary called "statuses", looping through services, copying key and values over to statuses   
     statuses={}
     for name in services:
+        print('Checking status of '+name)
         statuses[name]=health_checker(name)
     return jsonify(statuses)
 
