@@ -1,5 +1,4 @@
 name: CI - Run Tests
-
 on:
   push:
     branches:
@@ -7,7 +6,6 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -27,3 +25,10 @@ jobs:
       - name: Update Docker image
         run: |
           docker build -t homelab-health .
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASS }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+      - name: Push image to Docker Hub
+        run: |
+          docker tag homelab-health bongotw/homelab-health:latest
+          docker push bongotw/homelab-health:latest      
+    
