@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -26,4 +26,4 @@ jobs:
           pytest tests.py
       - name: Update Docker image
         run: |
-          docker build -t homelab-health
+          docker build -t homelab-health .

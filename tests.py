@@ -1,7 +1,15 @@
-import pytest
-from dashboard import health_checker
+from dashboard import app, services
 
-def test_health_checker():
-    assert health_checker('vm_ubuntu')=='Offline'
+def test_status_API():
+    with app.test_client() as client: #creates a temporary test client
+        status=client.get('/status')
+        #Assert response is JSON
+        assert status.is_json
+        #Get the JSON data from response
+        data=status.get_json()
+        #Assert it's in dictionary format
+        assert isinstance(data, dict)
 
-test_health_checker()
+        for i in services:
+            assert i in data
+test_status_API()
